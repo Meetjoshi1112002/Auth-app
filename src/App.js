@@ -4,11 +4,13 @@ import About from "./pages/about";
 import Signin from "./pages/signin";
 import Signup from "./pages/signup";
 import Profile from "./pages/profile";
+import Header from "./components/header";
 
 function App() {
   return (
     <>
       <Router>
+        <Header />
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/about" element={<About />}/>
