@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { authContext } from "../context/context";
 
 export default function Signup() {
+  const {handleCurrentUser} = useContext(authContext);
   const [form, setForm] = useState({});
   const [error, setError] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
@@ -24,8 +27,11 @@ export default function Signup() {
       setError(false);
       if (data.success === false) {
         setError(true);
+        setLoading(false);
         return;
       }
+      handleCurrentUser(data);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

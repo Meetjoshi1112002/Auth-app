@@ -5,11 +5,13 @@ import Signin from "./pages/signin";
 import Signup from "./pages/signup";
 import Profile from "./pages/profile";
 import Header from "./components/header";
+import ContextAuth from "./context/context";
 
 function App() {
   return (
     <>
       <Router>
+        <ContextAuth>
         <Header />
         <Routes>
           <Route path="/" element={<Home />}/>
@@ -18,6 +20,7 @@ function App() {
           <Route path="/sign-up" element={<Signup /> }/>
           <Route path="/profile" element={<Profile />}/>
         </Routes>
+        </ContextAuth>
       </Router>
     </>
   );

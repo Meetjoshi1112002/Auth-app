@@ -1,20 +1,23 @@
-import React ,{useState} from 'react'
+import React ,{useContext, useState} from 'react'
 import { useNavigate ,Link} from 'react-router-dom';
+import { authContext } from '../context/context';
 
 export default function Signin() {
+  const {handleCurrentUser} = useContext(authContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({});
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
+  // network part
   const handleSubmit = async (e) => {
     try {
       setLoading(true);
       e.preventDefault();
-      const result = await fetch("http://localhost:3001/api/user/signin", {
+      const result = await fetch("http://localhost:3000/api/user/sign-in", {
 
         method: "POST",
         headers: {
@@ -26,16 +29,20 @@ export default function Signin() {
       console.log(data);
       setError(false);
       if (data.success === false) {
-        setError(true);
+        setError(data.message);
+        console.log(data.message);
+        setLoading(false);
         return;
       }
+      handleCurrentUser(data);
       navigate("/");
-    } catch (error) {
+    } 
+    catch (error) {
       console.log(error);
+      setError(error)
     }
     setLoading(false);
   };
-  console.log(form);
   return (
     <div className="p-3 max-w-lg mx-auto ">
       <h1 className="my-7 text-center font-semibold text-3xl text-blue-500">Sign in</h1>
@@ -72,7 +79,7 @@ export default function Signin() {
           </Link>
         </span>
       </div>
-      <p className="text-red">{error && "Something went wrong"}</p>
+      <p className="text-red-600">{error.length ===0 ? "Something went wrong":error}</p>
     </div>
   );
 }
