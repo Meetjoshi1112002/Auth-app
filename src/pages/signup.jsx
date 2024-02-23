@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../context/context";
+import Oauth from "../components/oauth";
 
 export default function Signup() {
   const {handleCurrentUser} = useContext(authContext);
@@ -72,6 +73,7 @@ export default function Signup() {
         >
           {isLoading ? "Loading" : "Sign up"}
         </button>
+        <Oauth />
       </form>
       <div className="flex gap-5">
         <p>Have an account ?</p>

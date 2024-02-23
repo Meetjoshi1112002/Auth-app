@@ -1,6 +1,7 @@
 import React ,{useContext, useState} from 'react'
 import { useNavigate ,Link} from 'react-router-dom';
 import { authContext } from '../context/context';
+import Oauth from '../components/oauth';
 
 export default function Signin() {
   const {handleCurrentUser} = useContext(authContext);
@@ -70,6 +71,7 @@ export default function Signin() {
         >
           {isLoading ? "Loading" : "Sign in"}
         </button>
+        <Oauth />
       </form>
       <div className="flex gap-5">
         <p>Dont have an account ?</p>
