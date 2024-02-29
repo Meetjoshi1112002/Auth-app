@@ -6,6 +6,7 @@ import Signup from "./pages/signup";
 import Profile from "./pages/profile";
 import Header from "./components/header";
 import ContextAuth from "./context/context";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -18,7 +19,9 @@ function App() {
           <Route path="/about" element={<About />}/>
           <Route path="/sign-in" element={<Signin />}/>
           <Route path="/sign-up" element={<Signup /> }/>
+          <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />}/>
+          </Route>
         </Routes>
         </ContextAuth>
       </Router>

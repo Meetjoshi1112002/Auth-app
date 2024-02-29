@@ -3,7 +3,7 @@ import React, { createContext, useState } from 'react';
 export const authContext = createContext(null);
 
 export default function ContextAuth(props) {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
   const handleCurrentUser = (data)=>{
     setCurrentUser(data);
   }

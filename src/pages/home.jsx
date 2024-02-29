@@ -5,7 +5,7 @@ export default function Home() {
   const {currentUser} = useContext(authContext)
   return (
     <div>
-      welcome {currentUser.username}
+      welcome {currentUser?.username}
     </div>
   )
 }
